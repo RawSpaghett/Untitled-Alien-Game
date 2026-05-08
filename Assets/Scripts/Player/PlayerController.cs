@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] Transform playerCamera = null;
     [SerializeField] float mouseSensitivity = 5.0f;
-    [SerializeField] float moveSpeed = 5.0f;
+    [SerializeField] float moveSpeed = 100.0f;
 
     [SerializeField] bool lockCursor = true;
     // CharacterController controller = null;
@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
         Vector3 velocity = (transform.forward * inputDir.y + transform.right * inputDir.x) * moveSpeed;
     
         // controller.Move(velocity * Time.deltaTime);
-        rigidBody.AddForce(velocity * Time.deltaTime, ForceMode.VelocityChange);
+        rigidBody.linearVelocity = velocity * Time.deltaTime;
+        //rigidBody.AddForce(velocity * Time.deltaTime, ForceMode.VelocityChange);
     }
 }
