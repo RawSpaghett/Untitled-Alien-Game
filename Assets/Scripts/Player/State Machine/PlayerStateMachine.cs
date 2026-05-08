@@ -1,19 +1,32 @@
 using UnityEngine;
 
-public class PlayerStateMachine
+public class PlayerStateMachine : MonoBehaviour
 {
-    public PlayerState CurrentPlayerState { get; set; }
 
-	public void Initialize(PlayerState startState)
-	{
-		CurrentPlayerState = startState;
-		CurrentPlayerState.EnterState();
-	}    
+    PlayerBaseState currentState;
 
-	public void ChangeState(PlayerState newState)
-	{
-		CurrentPlayerState.ExitState();
-		CurrentPlayerState = newState;
-		CurrentPlayerState.EnterState();
-	}
+    PlayerCaughtState CaughtState = new PlayerCaughtState();
+    PlayerCrouchingState CrouchingState = new PlayerCrouchingState();
+    PlayerNormalState NormalState = new PlayerNormalState();
+
+
+    void Start()
+    {
+        // starting state for SM
+        currentState = NormalState;
+
+        // "this" is a reference to the context or the instance of the PlayerStateMachine
+        currentState.EnterState(this);
+    }
+
+    void Update()
+    {
+        currentState.UpdateState(this);
+    }
+
+    void SwitchState(PlayerBaseState state)
+    {
+        currentState = state;
+        state.EnterState(this);
+    }
 }

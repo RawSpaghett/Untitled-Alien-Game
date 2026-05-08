@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform playerCamera = null;
     [SerializeField] float mouseSensitivity = 5.0f;
     [SerializeField] float moveSpeed = 5.0f;
+    [SerializeField] float maxVelocity = 10.0f;
+    [SerializeField] float maxAngularVelocity = 10.0f;
 
     [SerializeField] bool lockCursor = true;
     [SerializeField] Rigidbody rigidBody = null;
@@ -56,6 +58,6 @@ public class PlayerController : MonoBehaviour
 
         Vector3 velocity = transform.right * inputDir.x + transform.forward * inputDir.y;
 
-        rigidBody.linearVelocity = new Vector3(velocity.x * moveSpeed, rigidBody.linearVelocity.y, velocity.z * moveSpeed);
+        rigidBody.linearVelocity = new Vector3(velocity.x * moveSpeed, 0.0f, velocity.z * moveSpeed);
     }
 }
