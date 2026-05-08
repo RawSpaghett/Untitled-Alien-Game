@@ -6,10 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] Transform playerCamera = null;
     [SerializeField] float mouseSensitivity = 5.0f;
-    [SerializeField] float moveSpeed = 100.0f;
+    [SerializeField] float moveSpeed = 5.0f;
 
     [SerializeField] bool lockCursor = true;
-    // CharacterController controller = null;
     [SerializeField] Rigidbody rigidBody = null;
 
     float cameraPitch = 0.0f;
@@ -17,8 +16,9 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // controller = GetComponent<CharacterController>();
+        
         rigidBody = GetComponent<Rigidbody>();
+
         if (lockCursor)
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -30,12 +30,16 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         UpdateMouseLook();
+        
+    }
+
+    private void FixedUpdate()
+    {
         UpdateMovement();
     }
 
     void UpdateMouseLook()
     {
-
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
         cameraPitch -= mouseDelta.y * mouseSensitivity;
@@ -49,13 +53,9 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 inputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         inputDir.Normalize();
-        Debug.Log(inputDir.x + ", " +inputDir.y);
 
+        Vector3 velocity = transform.right * inputDir.x + transform.forward * inputDir.y;
 
-        Vector3 velocity = (transform.forward * inputDir.y + transform.right * inputDir.x) * moveSpeed;
-    
-        // controller.Move(velocity * Time.deltaTime);
-        rigidBody.linearVelocity = velocity * Time.deltaTime;
-        //rigidBody.AddForce(velocity * Time.deltaTime, ForceMode.VelocityChange);
+        rigidBody.linearVelocity = new Vector3(velocity.x * moveSpeed, rigidBody.linearVelocity.y, velocity.z * moveSpeed);
     }
 }
