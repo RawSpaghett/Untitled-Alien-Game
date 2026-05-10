@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 5956354295522844861}
   - component: {fileID: 6312114491227960193}
   - component: {fileID: 6074193244142357422}
-  - component: {fileID: 2935233832522368499}
+  - component: {fileID: 2313217744085235022}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -269,6 +269,7 @@ MonoBehaviour:
   playerCamera: {fileID: 151555925250128162}
   mouseSensitivity: 5
   moveSpeed: 5
+  crouchSpeedModifier: 0.5
   lockCursor: 1
   rigidBody: {fileID: 0}
 --- !u!54 &6074193244142357422
@@ -298,7 +299,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &2935233832522368499
+--- !u!114 &2313217744085235022
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
