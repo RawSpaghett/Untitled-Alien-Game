@@ -2,9 +2,11 @@ using UnityEngine;
 
 public abstract class PlayerBaseState
 {
-	public abstract void EnterState(PlayerStateMachine player);
+	public abstract void EnterState(PlayerMovementManager movementManager);
 
-    public abstract void UpdateState(PlayerStateMachine player);
+    public abstract void UpdateState(PlayerMovementManager movementManager);
 
-    public abstract void OnCollisionEnter(PlayerStateMachine player);
+    public abstract void ExitState(PlayerMovementManager movementManager);
+
+    public abstract void CheckSwitchState(PlayerMovementManager movementManager);
 }

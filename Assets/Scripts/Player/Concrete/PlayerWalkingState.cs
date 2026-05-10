@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerCrouchingState : PlayerBaseState
+public class PlayerWalkingState : PlayerBaseState
 {
     public override void EnterState(PlayerMovementManager movementManager) 
     {
