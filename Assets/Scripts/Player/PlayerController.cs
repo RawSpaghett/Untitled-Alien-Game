@@ -12,13 +12,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool lockCursor = true;
     [SerializeField] Rigidbody rigidBody = null;
 
+    [SerializeField] PlayerHandManager handStateMachine = null;
+    [SerializeField] PlayerMovementManager movementStateMachine = null;
+
+    public Vector2 MoveInput;
+
     float cameraPitch = 0.0f;
+
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
         rigidBody = GetComponent<Rigidbody>();
+        handStateMachine = GetComponent<PlayerHandManager>();
+        movementStateMachine = GetComponent<PlayerMovementManager>();
 
         if (lockCursor)
         {
@@ -31,13 +40,15 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         UpdateMouseLook();
-        
     }
 
-    // FixedUpdate is called in a fixed intervla, regardless of framerate
+    // FixedUpdate is called in a fixed interval, regardless of framerate
     private void FixedUpdate()
     {
-        UpdateMovement();
+        //UpdateMovement();
+        Vector2 MoveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+
+        
     }
 
     void UpdateMouseLook()
@@ -51,20 +62,15 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(Vector3.up * mouseDelta.x * mouseSensitivity);
     }
     
-    void UpdateMovement()
-    {
-        Vector2 inputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        inputDir.Normalize();
+    //void UpdateMovement()
+    //{ 
 
 
-        Vector3 velocity = transform.right * inputDir.x + transform.forward * inputDir.y;
+    //    Vector3 velocity = transform.right * inputDir.x + transform.forward * inputDir.y;
 
-        if (Input.GetKey(KeyCode.C))
-        {
-            velocity *= crouchSpeedModifier;
-        }
         
-        // rigidBody.AddForce(velocity, ForceMode.Acceleration);
-        rigidBody.linearVelocity = new Vector3(velocity.x * moveSpeed, 0.0f, velocity.z * moveSpeed);
-    }
+        
+    //    // rigidBody.AddForce(velocity, ForceMode.Acceleration);
+    //    rigidBody.linearVelocity = new Vector3(velocity.x * moveSpeed, 0.0f, velocity.z * moveSpeed);
+    //}
 }

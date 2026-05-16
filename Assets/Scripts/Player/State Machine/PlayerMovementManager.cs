@@ -1,30 +1,31 @@
+// Context for player movement state machine 
 using UnityEngine;
 
 public class PlayerMovementManager : MonoBehaviour
 {
-    PlayerBaseState currentState;
-
-    PlayerBaseState idleState = new PlayerIdleState();
-    PlayerBaseState walkingState = new PlayerWalkingState();
-    PlayerBaseState crouchingState = new PlayerCrouchingState();
-
-    // I have to migrate the stuff from the movement controller here
-
+    public PlayerBaseState currentState;
+    public PlayerController player;    
+    
     void Start() 
     {
-    	currentState = idleState;
+        // give context access to PlayerController
+        player = GetComponent<PlayerController>();
 
+        // Player is idle at start
+    	currentState = new PlayerIdleState(this);
     	currentState.EnterState(this);
     }
 
-    void Update()
+    public void Update()
     {
-
+        currentState.UpdateState(this);
     }
 
-    void SwitchState(PlayerBaseState state) 
+    public void SwitchState(PlayerBaseState state) 
     {
-    	currentState = state;
+        currentState.ExitState(this);
+
+        currentState = state;
 
     	currentState.EnterState(this);
     }

@@ -4,6 +4,7 @@ public class PlayerHandManager : MonoBehaviour
 {
 
     HandBaseState currentState;
+    PlayerController controller;
 
     EmptyHandState emptyState = new EmptyHandState();
     HoldingItemState holdingItemState = new HoldingItemState();
