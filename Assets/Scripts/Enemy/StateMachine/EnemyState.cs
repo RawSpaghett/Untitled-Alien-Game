@@ -7,6 +7,8 @@ public class EnemyState
 {
     protected Enemy enemy;
     protected EnemyStateMachine enemyStateMachine;
+    public bool isPassive{get;protected set;}
+    public float speed;
 
     public EnemyState (Enemy enemy, EnemyStateMachine enemyStateMachine) // when declaring a new enemy state, EnemyState state = new EnemyState(enemy,enemyStateMachine)
     {

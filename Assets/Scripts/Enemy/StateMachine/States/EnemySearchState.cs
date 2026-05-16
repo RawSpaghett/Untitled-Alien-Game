@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class EnemyWanderState : EnemyState
+public class EnemySearchState : EnemyState
 {
-    public EnemyWanderState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
+    public EnemySearchState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
     {
+        isPassive = false;
     }
      public override void EnterState()
     {
